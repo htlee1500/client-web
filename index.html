@@ -8,10 +8,7 @@
 
   <!-- Site Properities -->
   <title>PAL</title>
-  <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.css">
-
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/semantic/dist/semantic.js"></script>
+  <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
 
 </head>
 <body>
@@ -69,20 +66,15 @@
   }
 </style>
 
-<script src="js/link.js" charset="utf-8"></script>
-<script src="js/result.js" charset="utf-8"></script>
-<script src="js/item.js" charset="utf-8"></script>
-<script src="js/form.js" charset="utf-8"></script>
+<script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+<script src="bower_components/semantic/dist/semantic.min.js" charset="utf-8" async></script>
+
+<script src="js/link.js" charset="utf-8" async></script>
+<script src="js/result.js" charset="utf-8" async></script>
+<script src="js/item.js" charset="utf-8" async></script>
+<script src="js/form.js" charset="utf-8" async></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
-  var
-    $headers     = $('body > h3'),
-    $header      = $headers.first(),
-    ignoreScroll = false,
-    timer
-  ;
-
   $('#search').keyup(function (event) {
     $.get('api/lookup/' + $(this).val(), function (data) {
       SetResult(data);
@@ -110,39 +102,6 @@ $(document).ready(function() {
       }
     });
   });
-  // Preserve example in viewport when resizing browser
-  $(window)
-    .on('resize', function() {
-      // ignore callbacks from scroll change
-      clearTimeout(timer);
-      $headers.visibility('disable callbacks');
-
-      // preserve position
-      $(document).scrollTop( $header.offset().top );
-
-      // allow callbacks in 500ms
-      timer = setTimeout(function() {
-        $headers.visibility('enable callbacks');
-      }, 500);
-    })
-  ;
-  $headers
-    .visibility({
-      // fire once each time passed
-      once: false,
-
-      // don't refresh position on resize
-      checkOnRefresh: true,
-
-      // lock to this element on resize
-      onTopPassed: function() {
-        $header = $(this);
-      },
-      onTopPassedReverse: function() {
-        $header = $(this);
-      }
-    })
-  ;
 });
 </script>
 
