@@ -23,19 +23,13 @@ function Result(object) {
     if (object.hasOwnProperty(prop) && prop !== '_id') {
       var description = document.createElement('div');
       description.className = 'description';
-      var link = MakeLink(prop, object[prop])
+      description.innerText = prop.charAt(0).toUpperCase() + prop.slice(1) +
+        ':  ';
+      var linkMaker = Links.get(prop);
+      var link = linkMaker(prop, object[prop]);
       description.appendChild(link);
       content.appendChild(description);
     }
   }
   return item;
-}
-
-function MakeLink(index, value) {
-  var link = document.createElement('a');
-  link.className = 'link';
-  link.target = '_blank';
-  link.href = 'https://' + index + ".com/" + value;
-  link.innerText = '@' + value;
-  return link;
 }
