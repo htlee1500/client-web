@@ -1,17 +1,20 @@
-function ShowForm(argument) {
+function ShowForm(account) {
   SetItem();
+  API.GetAccount(account, function (data) {
+    SetItem(data);
+  });
   $('#form').show();
 }
 
-function HideForm(argument) {
+function HideForm() {
   $('#form').hide();
 }
 
-function FormToObject(argument) {
+function FormToObject() {
   var object = {};
   var form = $('#formItems')[0].children;
   for (var i = 0; i < form.length; i++) {
-    object[form[i].formIndex.value] = form[i].formValue.value;
+    object[form[i].formKey.value] = form[i].formValue.value;
   }
   return object;
 }

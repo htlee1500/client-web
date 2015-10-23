@@ -18,7 +18,7 @@
 <div class="ui container">
   <div class="ui fluid action input left icon">
     <i class="search icon"></i>
-    <input id="search" type="tel" placeholder="Search for a number...">
+    <input id="account_search" type="text" placeholder="Search for someone...">
     <div id="addNew" class="ui teal button">Add</div>
   </div>
 </div>
@@ -34,10 +34,6 @@
     <div class="ui relaxed divided items">
       <div class="item ui input">
         <div id="addItem" class="ui teal button">Add Another</div>
-      </div>
-    </div>
-    <div class="ui relaxed divided items">
-      <div class="item ui input">
         <div id="submit" class="ui teal button">Submit</div>
       </div>
     </div>
@@ -69,41 +65,12 @@
 <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
 <script src="bower_components/semantic/dist/semantic.min.js" charset="utf-8" async></script>
 
+<script src="js/api.js" charset="utf-8" async></script>
 <script src="js/link.js" charset="utf-8" async></script>
 <script src="js/result.js" charset="utf-8" async></script>
 <script src="js/item.js" charset="utf-8" async></script>
 <script src="js/form.js" charset="utf-8" async></script>
-<script type="text/javascript">
-$(document).ready(function() {
-  $('#search').keyup(function (event) {
-    $.get('api/lookup/' + $(this).val(), function (data) {
-      SetResult(data);
-    });
-  })
-  $('#addNew').click(function (event) {
-    ShowForm();
-  });
-  $('#addItem').click(function (event) {
-    AddItem();
-  });
-  $('#submit').click(function (event) {
-    var object = FormToObject();
-    $.ajax({
-      type: "PUT",
-      url: 'api/lookup/' + object['_id'],
-      contentType: "application/json",
-      data: JSON.stringify(object),
-      success: function (data) {
-        $('#search').val(object['_id']);
-        $.get('api/lookup/' + $('#search').val(), function (data) {
-          SetResult(object);
-          HideForm();
-        });
-      }
-    });
-  });
-});
-</script>
+<script src="js/account.js" charset="utf-8" async></script>
 
 </body>
 </html>
