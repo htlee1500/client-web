@@ -6,6 +6,29 @@ var NumappAPI = function () {
   return this;
 };
 
+NumappAPI.prototype.Params = function () {
+  var pairs = location.hash.substr(1).split('&').map(function (pair) {
+    var kv = pair.split('=', 2);
+    return [decodeURIComponent(kv[0]), kv.length === 2 ? decodeURIComponent(kv[1]) : null];
+  });
+  var asObject = {};
+  for (var i = 0; i < pairs.length; i++) {
+    asObject[pairs[i][0]] = pairs[i][1]
+  }
+  return asObject;
+};
+
+NumappAPI.prototype.GetCookie = function (cookieName) {
+  var name = cookieName + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+};
+
 NumappAPI.prototype.GenericRequest = function (url, object, callback) {
   var request = {
     type: 'GET',

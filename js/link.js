@@ -23,4 +23,11 @@ Linker.prototype.generic = function (index, value) {
   return link;
 };
 
+Linker.prototype.email = function (index, value) {
+  var link = this.genericElement();
+  link.href = 'mailto:' + value;
+  link.innerText = value;
+  return link;
+};
+
 var Links = new Linker();

@@ -10,15 +10,7 @@ function AddResult(result) {
 }
 
 function Result(object) {
-  var item = document.createElement('div');
-  item.className = 'item';
-  var content = document.createElement('div');
-  content.className = 'content';
-  item.appendChild(content);
-  var header = document.createElement('a');
-  header.className = 'header';
-  header.innerText = object['_id'];
-  content.appendChild(header);
+  var item = BasicCard(object);
   for (var prop in object) {
     if (object.hasOwnProperty(prop) && prop !== '_id') {
       var description = document.createElement('div');
@@ -28,8 +20,40 @@ function Result(object) {
       var linkMaker = Links.get(prop);
       var link = linkMaker(prop, object[prop]);
       description.appendChild(link);
-      content.appendChild(description);
+      item.content.appendChild(description);
     }
   }
+  return item;
+}
+
+function BasicCard(object) {
+  var item = document.createElement('div');
+  item.className = 'ui centered card';
+  if (typeof object['email'] === 'string') {
+    var profilePic = document.createElement('img');
+    profilePic.className = 'image';
+    profilePic.src = gravatar(object['email'], {
+      size: 200,
+      rating: 'pg',
+      backup: 'retro',
+      secure: true
+    });
+    profilePic.onload = function (event) {
+      this.height = this.width;
+      this.width = this.height;
+    };
+    item.appendChild(profilePic);
+    item.profilePic = profilePic;
+  }
+  var content = document.createElement('div');
+  content.className = 'content';
+  item.appendChild(content);
+  item.content = content;
+  var header = document.createElement('a');
+  header.className = 'header';
+  header.innerText = object['_id'];
+  header.href = '/user/#id=' + object['_id'];
+  content.appendChild(header);
+  item.header = header;
   return item;
 }

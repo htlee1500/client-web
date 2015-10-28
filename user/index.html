@@ -7,27 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properities -->
-  <title>PAL</title>
+  <title>Profile - PAL</title>
   <link rel="stylesheet" type="text/css" href="/bower_components/semantic/dist/semantic.min.css">
 
 </head>
 <body>
 
-<h1 class="ui center aligned header">PAL</h1>
-
-<div class="ui container">
-  <div class="ui fluid input left icon">
-    <i class="search icon"></i>
-    <input id="account_search" type="text" placeholder="Search for someone...">
-  </div>
-</div>
-
-<br>
-<br>
-<br>
+<h1 id="username" class="ui center aligned header"></h1>
 
 <div class="ui container">
   <div id="results" class="ui relaxed divided items"></div>
+  <div id="form">
+    <div id="formItems" class="ui relaxed divided items">
+    </div>
+    <div class="ui relaxed divided items">
+      <div class="item ui input">
+        <div id="addItem" class="ui teal button">Add Another</div>
+        <div id="submit" class="ui teal button">Submit</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Content JS HERE !-->
@@ -45,6 +44,9 @@
     margin-top: 2em;
     padding: 2em 0em;
   }
+  #form {
+    display: none;
+  }
 </style>
 
 <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
@@ -56,7 +58,7 @@
 <script src="/js/result.js" charset="utf-8"></script>
 <script src="/js/item.js" charset="utf-8"></script>
 <script src="/js/form.js" charset="utf-8"></script>
-<script src="/js/account.js" charset="utf-8"></script>
+<script src="/js/user.js" charset="utf-8"></script>
 
 </body>
 </html>

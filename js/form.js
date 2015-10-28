@@ -1,9 +1,18 @@
-function ShowForm(account) {
-  SetItem();
+function ShowForm(account, callback) {
   API.GetAccount(account, function (data) {
-    SetItem(data);
+    // Only if the user owns the account will they be able to save
+    // this just lets the web client check if it should display the form
+    // Authentication is handled server side so if they were to edit on the
+    // client side it just would never save
+    var id = API.GetCookie('id')
+    if (account === id) {
+      SetItem(data);
+      $('#form').show();
+    }
+    if (typeof callback === 'function') {
+      callback(data);
+    }
   });
-  $('#form').show();
 }
 
 function HideForm() {
