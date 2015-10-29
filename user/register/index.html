@@ -21,7 +21,7 @@
         Register
       </div>
     </h2>
-    <form class="ui large form">
+    <form id="registrationForm" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
@@ -46,6 +46,10 @@
             <i class="lock icon"></i>
             <input type="password" name="confirm_password"
             placeholder="Confrim Password">
+          </div>
+        </div>
+        <div class="field">
+          <div class="g-recaptcha" data-sitekey="6LcOzA8TAAAAAKdM4XE3aV_xZPLOGJv5Ik35iIMD">
           </div>
         </div>
         <div class="ui fluid large teal submit button">Register</div>
@@ -77,6 +81,8 @@
   }
 </style>
 
+<script src="//www.google.com/recaptcha/api.js" charset="utf-8"></script>
+
 <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
 <script src="/bower_components/semantic/dist/semantic.min.js" charset="utf-8"></script>
 <script src="/bower_components/gravatarjs/gravatar.js" charset="utf-8"></script>
@@ -87,6 +93,7 @@
 <script src="/js/item.js" charset="utf-8"></script>
 <script src="/js/form.js" charset="utf-8"></script>
 <script src="/js/form_validation.js" charset="utf-8"></script>
+<script src="/js/register.js" charset="utf-8"></script>
 
 </body>
 </html>

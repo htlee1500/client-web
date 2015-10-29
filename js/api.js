@@ -1,7 +1,8 @@
 var NumappAPI = function () {
   this.server = location.origin;
   this.URLMaping = {
-    'account': '/api/account/:id'
+    'account': '/api/account/:id',
+    'register': '/api/user/register',
   };
   return this;
 };
@@ -56,6 +57,11 @@ NumappAPI.prototype.GetAccount = function (id, callback) {
 NumappAPI.prototype.SaveAccount = function (id, data, callback) {
   var url = this.URLMaping['account'];
   url = url.replace(/:id/g, id);
+  this.GenericRequest(url, data, callback);
+};
+
+NumappAPI.prototype.RegisterUser = function (data, callback) {
+  var url = this.URLMaping['register'];
   this.GenericRequest(url, data, callback);
 };
 
