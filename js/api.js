@@ -30,13 +30,19 @@ NumappAPI.prototype.GetCookie = function (cookieName) {
   return "";
 };
 
-NumappAPI.prototype.GenericRequest = function (url, object, callback) {
+NumappAPI.prototype.GenericRequest = function (url, object, callback, errorCallback) {
   var request = {
     type: 'GET',
     url: this.server + url,
     success: function (data) {
       if (typeof callback === 'function') {
         callback(data);
+      }
+    },
+    error: function (data) {
+      console.log('error', data);
+      if (typeof errorCallback === 'function') {
+        errorCallback(data);
       }
     }
   };
@@ -48,21 +54,21 @@ NumappAPI.prototype.GenericRequest = function (url, object, callback) {
   $.ajax(request);
 };
 
-NumappAPI.prototype.GetAccount = function (id, callback) {
+NumappAPI.prototype.GetAccount = function (id, callback, errorCallback) {
   var url = this.URLMaping['account'];
   url = url.replace(/:id/g, id);
-  this.GenericRequest(url, null, callback);
+  this.GenericRequest(url, null, callback, errorCallback);
 };
 
-NumappAPI.prototype.SaveAccount = function (id, data, callback) {
+NumappAPI.prototype.SaveAccount = function (id, data, callback, errorCallback) {
   var url = this.URLMaping['account'];
   url = url.replace(/:id/g, id);
-  this.GenericRequest(url, data, callback);
+  this.GenericRequest(url, data, callback, errorCallback);
 };
 
-NumappAPI.prototype.RegisterUser = function (data, callback) {
+NumappAPI.prototype.RegisterUser = function (data, callback, errorCallback) {
   var url = this.URLMaping['register'];
-  this.GenericRequest(url, data, callback);
+  this.GenericRequest(url, data, callback, errorCallback);
 };
 
 API = new NumappAPI();
