@@ -6,8 +6,10 @@ $(document).ready(function () {
       object[x.name] = x.value;
     });
     console.log(object);
+    $('#registerSubmit').attr('disable', true);
     API.RegisterUser(object,
       function (data) {
+        $('#registerSubmit').attr('disable', false);
         $('#registerFormErrors').hide();
         API.LoginUser(object,
           function (data) {
@@ -15,6 +17,7 @@ $(document).ready(function () {
             location.href = '/';
           },
           function (error) {
+            $('#registerSubmit').attr('disable', false);
             if (typeof error.responseJSON !== 'undefined' &&
               typeof error.responseJSON.Error !== 'undefined') {
               $('#registerFormErrors').text(error.responseJSON.Error);
@@ -26,6 +29,7 @@ $(document).ready(function () {
         );
       },
       function (error) {
+        $('#registerSubmit').attr('disable', false);
         if (typeof error.responseJSON !== 'undefined' &&
           typeof error.responseJSON.Error !== 'undefined') {
           $('#registerFormErrors').text(error.responseJSON.Error);

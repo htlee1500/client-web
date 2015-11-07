@@ -1,5 +1,7 @@
 var NumappAPI = function () {
   this.server = location.origin;
+  this.tokenCookieName = 'numapp_token';
+  this.token = '';
   this.URLMaping = {
     'account': '/api/account/:id',
     'login': '/api/user/login',
@@ -22,14 +24,32 @@ NumappAPI.prototype.Params = function () {
 };
 
 NumappAPI.prototype.GetCookie = function (cookieName) {
-  var name = cookieName + "=";
+  var name = cookieName + '=';
   var ca = document.cookie.split(';');
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') c = c.substring(1);
     if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
-  return "";
+  return '';
+};
+
+NumappAPI.prototype.GetToken = function (token) {
+  this.token = this.GetCookie(this.tokenCookieName);
+  return this.SetToken(this.token);
+};
+
+NumappAPI.prototype.SetToken = function (token) {
+  this.token = token;
+  var setCookie = this.tokenCookieName + '=' + this.token + '; ' +
+    'path=/';
+  document.cookie = setCookie;
+  $.ajaxSetup({
+    headers: {
+      'Authorization': 'Bearer ' + this.token
+    }
+  });
+  return this.token;
 };
 
 NumappAPI.prototype.GenericRequest = function (url, object, callback, errorCallback) {
