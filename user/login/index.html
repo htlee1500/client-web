@@ -21,12 +21,12 @@
         Login
       </div>
     </h2>
-    <form class="ui large form">
+    <form id="loginForm" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
+            <input type="text" name="username" placeholder="Username">
           </div>
         </div>
         <div class="field">
@@ -38,7 +38,7 @@
         <div class="ui fluid large teal submit button">Login</div>
       </div>
 
-      <div class="ui error message"></div>
+      <div id="loginFormErrors" class="ui error message"></div>
 
       <div class="ui message">
         <a href="/user/register/">Register</a>
@@ -74,6 +74,7 @@
 <script src="/js/item.js" charset="utf-8"></script>
 <script src="/js/form.js" charset="utf-8"></script>
 <script src="/js/form_validation.js" charset="utf-8"></script>
+<script src="/js/login.js" charset="utf-8"></script>
 
 </body>
 </html>

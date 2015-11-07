@@ -9,7 +9,21 @@ $(document).ready(function () {
     API.RegisterUser(object,
       function (data) {
         $('#registerFormErrors').hide();
-        console.log('Registered', data);
+        API.LoginUser(object,
+          function (data) {
+            console.log("Login success", data);
+            location.href = '/';
+          },
+          function (error) {
+            if (typeof error.responseJSON !== 'undefined' &&
+              typeof error.responseJSON.Error !== 'undefined') {
+              $('#registerFormErrors').text(error.responseJSON.Error);
+            } else {
+              $('#registerFormErrors').text('There was an error loging in');
+            }
+            $('#registerFormErrors').show();
+          }
+        );
       },
       function (error) {
         if (typeof error.responseJSON !== 'undefined' &&
