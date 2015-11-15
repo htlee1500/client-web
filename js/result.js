@@ -1,7 +1,11 @@
 function SetResult(result) {
-  $('#results').html('');
+  ClearResult();
   result = Result(result);
   $('#results')[0].appendChild(result);
+}
+
+function ClearResult() {
+  $('#results').html('');
 }
 
 function AddResult(result) {

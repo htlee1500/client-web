@@ -1,12 +1,11 @@
 function ShowForm(account, callback) {
-  var pageUser = API.User();
+  var user = API.User();
   API.GetAccount(account, function (data) {
     // Only if the user owns the account will they be able to save
     // this just lets the web client check if it should display the form
     // Authentication is handled server side so if they were to edit on the
     // client side it just would never save
-    var id = pageUser['id']
-    if (account === id) {
+    if (account === user['id']) {
       SetItem(data);
       $('#form').show();
     }

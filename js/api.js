@@ -11,6 +11,18 @@ var NumappAPI = function () {
   return this;
 };
 
+NumappAPI.prototype.PageParams = function () {
+  var pairs = location.hash.substr(1).split('&').map(function (pair) {
+    var kv = pair.split('=', 2);
+    return [decodeURIComponent(kv[0]), kv.length === 2 ? decodeURIComponent(kv[1]) : null];
+  });
+  var asObject = {};
+  for (var i = 0; i < pairs.length; i++) {
+    asObject[pairs[i][0]] = pairs[i][1]
+  }
+  return asObject;
+};
+
 NumappAPI.prototype.User = function () {
   var token = this.GetToken();
   token = token.split('.');
