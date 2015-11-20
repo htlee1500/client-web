@@ -1,4 +1,4 @@
-function ShowForm(account, callback) {
+function ShowForm(account, callback, errorCallback) {
   var user = API.User();
   API.GetAccount(account, function (data) {
     // Only if the user owns the account will they be able to save
@@ -12,7 +12,7 @@ function ShowForm(account, callback) {
     if (typeof callback === 'function') {
       callback(data);
     }
-  });
+  }, errorCallback);
 }
 
 function HideForm() {

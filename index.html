@@ -14,13 +14,20 @@
 <body>
 
 <h1 class="ui center aligned header">
-  <img src="/assets/images/logo.png" class="image">
+  <a id="homeLink" href="#" class="ui image">
+    <img src="/assets/images/logo.png" class="image">
+  </a>
 </h1>
 
 <div class="ui container">
-  <div class="ui fluid input left icon">
+  <div class="ui fluid right labeled input left icon">
     <i class="search icon"></i>
     <input id="account_search" type="text" placeholder="Search for someone...">
+    <div class="ui tag label">
+      <a id="myAccount">My Account</a>
+    </div>
+  </div>
+  <div class="ui fluid input left icon">
   </div>
 </div>
 
@@ -30,6 +37,19 @@
 
 <div class="ui container">
   <div id="results" class="ui relaxed divided items"></div>
+  <div id="form" class="hide">
+    <div id="formItems" class="ui relaxed divided items">
+    </div>
+    <div class="ui relaxed divided items">
+      <div class="item ui input">
+        <div id="addItem" class="ui teal button">Add Another</div>
+        <div id="submit" class="ui teal button">Save</div>
+      </div>
+    </div>
+    <div id="accountFormErrors" class="ui error message hide"></div>
+    <br>
+    <br>
+  </div>
 </div>
 
 <!-- Content JS HERE !-->
@@ -47,6 +67,9 @@
     margin-top: 2em;
     padding: 2em 0em;
   }
+  .hide {
+    display: none;
+  }
 </style>
 
 <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
@@ -60,6 +83,7 @@
 <script src="/js/item.js" charset="utf-8"></script>
 <script src="/js/form.js" charset="utf-8"></script>
 <script src="/js/search.js" charset="utf-8"></script>
+<script src="/js/account.js" charset="utf-8"></script>
 
 </body>
 </html>

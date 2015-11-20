@@ -56,7 +56,7 @@ function BasicCard(object) {
   var header = document.createElement('a');
   header.className = 'header';
   header.innerText = object['_id'];
-  header.href = '/account/#id=' + object['_id'];
+  header.href = '/#id=' + object['_id'];
   content.appendChild(header);
   item.header = header;
   return item;

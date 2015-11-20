@@ -1,22 +1,29 @@
 $(document).ready(function () {
-  var pageParams = API.PageParams();
-  setSearchedAccount(pageParams['id']);
+  displaySearch();
+  var user = API.User();
+  $('#myAccount').html(user['id']);
+  $('#myAccount').click(function (event) {
+    window.location.hash = '#id=' + user['id'];
+    displaySearch();
+  });
   $('#account_search').keyup(function (event) {
     window.location.hash = '#id=' + $('#account_search').val();
-    var pageParams = API.PageParams();
-    setSearchedAccount(pageParams['id']);
+    displaySearch();
+  });
+  $('#homeLink').click(function (event) {
+    $('#account_search').val('');
+    displayAccount(undefined);
   });
 });
 
-var setSearchedAccount = function (id) {
-  if (typeof id !== 'undefined') {
-    API.GetAccount(id,
-      function (data) {
-        SetResult(data);
-      },
-      function (error) {
-        ClearResult();
-      }
-    );
+// Without lastSearch functionality Ctrl-a does not work
+var lastSearch = '';
+var displaySearch = function () {
+  var id = API.PageParams()['id'];
+  if (lastSearch === id) {
+    return;
   }
+  displayAccount(id);
+  $('#account_search').val(id);
+  lastSearch = id;
 };

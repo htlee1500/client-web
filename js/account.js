@@ -1,9 +1,4 @@
 $(document).ready(function () {
-  var pageParams = API.PageParams();
-  ShowForm(pageParams['id'], function (data) {
-    $('#username').text(pageParams['id']);
-    SetResult(data);
-  });
   $('#addItem').click(function (event) {
     AddItem();
   });
@@ -27,3 +22,21 @@ $(document).ready(function () {
     );
   });
 });
+
+var displayAccount = function (id) {
+  if (typeof id === 'string' && id.length > 0) {
+    ShowForm(id,
+      function (data) {
+        $('#username').text(id);
+        SetResult(data);
+      },
+      function (error) {
+        ClearResult();
+        $('#form').hide();
+      }
+    );
+  } else {
+    ClearResult();
+    $('#form').hide();
+  }
+};

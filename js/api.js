@@ -2,6 +2,7 @@ var NumappAPI = function () {
   this.server = location.origin;
   this.tokenCookieName = 'numapp_token';
   this.token = '';
+  this.onError = {};
   this.URLMaping = {
     'account': '/api/account/:id',
     'login': '/api/user/login',
@@ -67,13 +68,16 @@ NumappAPI.prototype.GenericRequest = function (url, object, callback, errorCallb
       if (typeof callback === 'function') {
         callback(data);
       }
-    },
+    }.bind(this),
     error: function (data) {
-      console.log('error', data);
+      console.log(typeof this.onError[data.status]);
+      if (typeof this.onError[data.status] === 'function') {
+        this.onError[data.status](data);
+      }
       if (typeof errorCallback === 'function') {
         errorCallback(data);
       }
-    }
+    }.bind(this)
   };
   if (object !== null) {
     request['type'] = 'POST';
@@ -81,6 +85,10 @@ NumappAPI.prototype.GenericRequest = function (url, object, callback, errorCallb
     request['data'] = JSON.stringify(object);
   }
   $.ajax(request);
+};
+
+NumappAPI.prototype.OnError = function (errorCode, callback) {
+  this.onError[errorCode] = callback;
 };
 
 NumappAPI.prototype.GetAccount = function (id, callback, errorCallback) {
