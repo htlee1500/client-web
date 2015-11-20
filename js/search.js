@@ -13,6 +13,7 @@ $(document).ready(function () {
   $('#homeLink').click(function (event) {
     $('#account_search').val('');
     displayAccount(undefined);
+    lastSearch = '';
   });
 });
 
