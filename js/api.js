@@ -70,7 +70,7 @@ NumappAPI.prototype.GenericRequest = function (url, object, callback, errorCallb
       }
     }.bind(this),
     error: function (data) {
-      console.log(typeof this.onError[data.status]);
+      console.log(data.status, typeof this.onError[data.status]);
       if (typeof this.onError[data.status] === 'function') {
         this.onError[data.status](data);
       }

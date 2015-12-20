@@ -5,11 +5,10 @@ $(document).ready(function () {
     $(this).serializeArray().map(function (x) {
       object[x.name] = x.value;
     });
-    console.log(object);
-    $('#loginSubmit').attr('disable', true);
+    loggingInShow();
     API.LoginUser(object,
       function (data) {
-        $('#loginSubmit').attr('disable', false);
+        loggingInHide();
         $('#loginFormErrors').hide();
         console.log('Logged in', data);
         if (data.hasOwnProperty('token')) {
@@ -20,7 +19,7 @@ $(document).ready(function () {
         }
       },
       function (error) {
-        $('#loginSubmit').attr('disable', false);
+        loggingInHide();
         if (typeof error.responseJSON !== 'undefined' &&
           typeof error.responseJSON.Error !== 'undefined') {
           $('#loginFormErrors').text(error.responseJSON.Error);
@@ -33,3 +32,11 @@ $(document).ready(function () {
     return false;
   });
 });
+
+var loggingInShow = function () {
+  $('#loggingIn').modal('setting', 'closable', false).modal('show');
+};
+
+var loggingInHide = function () {
+  $('#loggingIn').modal('hide');
+};
